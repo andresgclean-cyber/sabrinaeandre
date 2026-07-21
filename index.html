@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sabrina &amp; André — 10 de outubro de 2026</title>
+<meta name="description" content="Com alegria, convidamos você para celebrar conosco este dia tão especial.">
+<meta name="theme-color" content="#eae6dc">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sabrina &amp; André — 10.10.2026">
+<meta property="og:description" content="Com alegria, convidamos você para celebrar conosco este dia tão especial.">
+<meta property="og:image" content="pagina2.png">
+<style>
+  :root{--verde:#5b7052;--verde-escuro:#3f5138;--creme:#eae6dc;--papel:#f4f1e9}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{margin:0;background:radial-gradient(120% 80% at 50% 0%,#f3f0e8 0%,var(--creme) 55%,#ddd8cb 100%);
+    font-family:Georgia,'Times New Roman',serif;color:var(--verde-escuro);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:16px 12px calc(16px + env(safe-area-inset-bottom));overflow:hidden}
+  .palco{position:relative;width:min(94vw,46vh,520px);aspect-ratio:1241/1747;perspective:1800px;
+    filter:drop-shadow(0 18px 38px rgba(63,81,56,.22))}
+  .slide{position:absolute;inset:0;border-radius:4px;overflow:hidden;background:var(--papel);
+    opacity:0;visibility:hidden;transition:opacity .7s ease}
+  .slide.ativo{opacity:1;visibility:visible}
+  .slide img{width:100%;height:100%;display:block;object-fit:cover}
+  .capa{position:absolute;inset:0;z-index:5;transform-style:preserve-3d}
+  .aba{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;
+    transition:transform 1.5s cubic-bezier(.6,.02,.2,1);will-change:transform}
+  .face{position:absolute;inset:0;backface-visibility:hidden;overflow:hidden}
+  .face img{position:absolute;top:0;height:100%;width:200%;max-width:none;display:block}
+  .esq{left:0;transform-origin:left center}
+  .dir{right:0;transform-origin:right center}
+  .esq .face img{left:0}
+  .dir .face img{right:0}
+  .verso{background:linear-gradient(90deg,#efebe1,#f6f3ec);transform:rotateY(180deg)}
+  .capa.aberta .esq{transform:rotateY(-172deg)}
+  .capa.aberta .dir{transform:rotateY(172deg)}
+  .capa.fim{opacity:0;pointer-events:none;transition:opacity .6s ease .2s}
+  .pulso{position:absolute;left:50%;top:49.3%;width:26%;aspect-ratio:1;transform:translate(-50%,-50%);
+    border-radius:50%;z-index:6;cursor:pointer;animation:pulsar 2.6s ease-in-out infinite}
+  @keyframes pulsar{0%,100%{box-shadow:0 0 0 0 rgba(91,112,82,.34)}60%{box-shadow:0 0 0 18px rgba(91,112,82,0)}}
+  .capa.aberta .pulso{display:none}
+  .rodape{margin-top:18px;height:52px;display:flex;align-items:center;justify-content:center;gap:16px}
+  .dica{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--verde);
+    animation:respirar 2.8s ease-in-out infinite}
+  @keyframes respirar{0%,100%{opacity:.45}50%{opacity:.95}}
+  .btn{appearance:none;border:1px solid rgba(91,112,82,.45);background:rgba(255,255,255,.55);
+    color:var(--verde-escuro);font-family:inherit;font-size:14px;letter-spacing:.12em;text-transform:uppercase;
+    padding:11px 20px;border-radius:999px;cursor:pointer;transition:background .25s,transform .15s}
+  .btn:hover{background:rgba(255,255,255,.9)}
+  .btn:active{transform:scale(.97)}
+  .btn.principal{background:var(--verde);color:#fff;border-color:var(--verde)}
+  .seta{width:44px;height:44px;padding:0;font-size:17px;display:grid;place-items:center}
+  .pontos{display:flex;gap:7px}
+  .ponto{width:7px;height:7px;border-radius:50%;background:rgba(91,112,82,.28);transition:.3s}
+  .ponto.on{background:var(--verde);transform:scale(1.35)}
+  .oculto{display:none!important}
+  .aviso{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--verde-escuro);
+    color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.35s}
+  .aviso.ver{opacity:1;transform:translate(-50%,0)}
+  @media (prefers-reduced-motion:reduce){.aba{transition-duration:.4s}.pulso,.dica{animation:none}}
+</style>
+</head>
+<body>
+<div class="palco" id="palco">
+  <div class="slide" id="s1"><img src="pagina2.png" alt="Convite: Sabrina e André, 10 de outubro de 2026, às 13h, Estrada da Ressaca, 1000, Itapecerica da Serra"></div>
+  <div class="slide" id="s2"><img src="pagina3.png" alt="Vocês fazem parte da nossa história — confirmação de presença e lista de presentes"></div>
+  <div class="capa" id="capa">
+    <div class="aba esq"><div class="face"><img src="capa.png" alt=""></div><div class="face verso"></div></div>
+    <div class="aba dir"><div class="face"><img src="capa.png" alt=""></div><div class="face verso"></div></div>
+  </div>
+  <div class="pulso" id="pulso" role="button" tabindex="0" aria-label="Abrir o convite"></div>
+</div>
+<div class="rodape">
+  <span class="dica" id="dica">toque no lacre para abrir</span>
+  <button class="btn seta oculto" id="voltar" aria-label="Anterior">&#8592;</button>
+  <div class="pontos oculto" id="pontos"><span class="ponto on"></span><span class="ponto"></span></div>
+  <button class="btn seta oculto" id="avancar" aria-label="Próximo">&#8594;</button>
+  <button class="btn principal oculto" id="rsvp">Confirmar presença</button>
+</div>
+<div class="aviso" id="aviso"></div>
+<script>
+  /* ====== EDITE AQUI: cole o link do RSVP entre as aspas ====== */
+  const RSVP_URL = "";
+  /* =========================================================== */
+  const capa=document.getElementById('capa'),pulso=document.getElementById('pulso'),
+    dica=document.getElementById('dica'),voltar=document.getElementById('voltar'),
+    avancar=document.getElementById('avancar'),pontos=document.getElementById('pontos'),
+    rsvp=document.getElementById('rsvp'),aviso=document.getElementById('aviso'),
+    slides=[document.getElementById('s1'),document.getElementById('s2')];
+  let aberto=false,atual=0;
+  function abrir(){
+    if(aberto)return; aberto=true;
+    slides[0].classList.add('ativo'); capa.classList.add('aberta'); dica.classList.add('oculto');
+    setTimeout(()=>{capa.classList.add('fim');pontos.classList.remove('oculto');avancar.classList.remove('oculto');},1250);
+  }
+  function ir(i){
+    if(!aberto||i<0||i>1||i===atual)return;
+    slides[atual].classList.remove('ativo'); slides[i].classList.add('ativo'); atual=i;
+    pontos.children[0].classList.toggle('on',i===0);
+    pontos.children[1].classList.toggle('on',i===1);
+    voltar.classList.toggle('oculto',i===0);
+    avancar.classList.toggle('oculto',i===1);
+    rsvp.classList.toggle('oculto',i!==1);
+  }
+  function mostrarAviso(t){aviso.textContent=t;aviso.classList.add('ver');
+    clearTimeout(aviso._t);aviso._t=setTimeout(()=>aviso.classList.remove('ver'),2600);}
+  pulso.addEventListener('click',abrir);
+  pulso.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();abrir();}});
+  capa.addEventListener('click',abrir);
+  avancar.addEventListener('click',()=>ir(atual+1));
+  voltar.addEventListener('click',()=>ir(atual-1));
+  rsvp.addEventListener('click',()=>{RSVP_URL?window.open(RSVP_URL,'_blank','noopener'):mostrarAviso('Link de confirmação em breve 💚');});
+  document.addEventListener('keydown',e=>{
+    if(!aberto){if(e.key==='Enter'||e.key===' ')abrir();return;}
+    if(e.key==='ArrowRight')ir(atual+1);
+    if(e.key==='ArrowLeft')ir(atual-1);
+  });
+  let x0=null; const palco=document.getElementById('palco');
+  palco.addEventListener('touchstart',e=>{x0=e.changedTouches[0].clientX;},{passive:true});
+  palco.addEventListener('touchend',e=>{
+    if(x0===null)return;
+    const dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>45)ir(dx<0?atual+1:atual-1);
+    x0=null;
+  },{passive:true});
+</script>
+</body>
+</html>
