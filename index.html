@@ -56,9 +56,6 @@
   .ponto{width:7px;height:7px;border-radius:50%;background:rgba(91,112,82,.28);transition:.3s}
   .ponto.on{background:var(--verde);transform:scale(1.35)}
   .oculto{display:none!important}
-  .aviso{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--verde-escuro);
-    color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.35s}
-  .aviso.ver{opacity:1;transform:translate(-50%,0)}
   @media (prefers-reduced-motion:reduce){.aba{transition-duration:.4s}.pulso,.dica{animation:none}}
 </style>
 </head>
@@ -77,17 +74,16 @@
   <button class="btn seta oculto" id="voltar" aria-label="Anterior">&#8592;</button>
   <div class="pontos oculto" id="pontos"><span class="ponto on"></span><span class="ponto"></span></div>
   <button class="btn seta oculto" id="avancar" aria-label="Próximo">&#8594;</button>
-  <button class="btn principal oculto" id="rsvp">Confirmar presença</button>
+  <button class="btn principal oculto" id="rsvp">Presença e presentes</button>
 </div>
-<div class="aviso" id="aviso"></div>
 <script>
-  /* ====== EDITE AQUI: cole o link do RSVP entre as aspas ====== */
+  /* Site do casal — confirmação de presença e lista de presentes */
   const RSVP_URL = "https://noivos.casar.com/sabrina-e-andre-2026-10-03/#/one-page/_start";
-  /* =========================================================== */
+
   const capa=document.getElementById('capa'),pulso=document.getElementById('pulso'),
     dica=document.getElementById('dica'),voltar=document.getElementById('voltar'),
     avancar=document.getElementById('avancar'),pontos=document.getElementById('pontos'),
-    rsvp=document.getElementById('rsvp'),aviso=document.getElementById('aviso'),
+    rsvp=document.getElementById('rsvp'),
     slides=[document.getElementById('s1'),document.getElementById('s2')];
   let aberto=false,atual=0;
   function abrir(){
@@ -104,14 +100,12 @@
     avancar.classList.toggle('oculto',i===1);
     rsvp.classList.toggle('oculto',i!==1);
   }
-  function mostrarAviso(t){aviso.textContent=t;aviso.classList.add('ver');
-    clearTimeout(aviso._t);aviso._t=setTimeout(()=>aviso.classList.remove('ver'),2600);}
   pulso.addEventListener('click',abrir);
   pulso.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();abrir();}});
   capa.addEventListener('click',abrir);
   avancar.addEventListener('click',()=>ir(atual+1));
   voltar.addEventListener('click',()=>ir(atual-1));
-  rsvp.addEventListener('click',()=>{RSVP_URL?window.open(RSVP_URL,'_blank','noopener'):mostrarAviso('Link de confirmação em breve 💚');});
+  rsvp.addEventListener('click',()=>{window.open(RSVP_URL,'_blank','noopener');});
   document.addEventListener('keydown',e=>{
     if(!aberto){if(e.key==='Enter'||e.key===' ')abrir();return;}
     if(e.key==='ArrowRight')ir(atual+1);
@@ -128,3 +122,4 @@
 </script>
 </body>
 </html>
+
